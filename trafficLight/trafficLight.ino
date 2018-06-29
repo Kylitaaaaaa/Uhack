@@ -85,10 +85,12 @@ void loop() {
   //LOGIC PART
   while(true){
     turnOnGLight(roadChecker-1);
+    turnOffRLight(roadChecker-1);
     if(digitalRead(s12) == HIGH){
-       sensor2[roadChecker-1]--;
-       sensor1[roadChecker-1]--;
-       delay(100);
+      Serial.println("a car exited at s12");
+      sensor2[roadChecker-1]--;
+      sensor1[roadChecker-1]--;
+      delay(100);
     if(sensor2[roadCheck-1] == 0) break;
     }
    
@@ -102,7 +104,7 @@ void loop() {
 
   
 
-
+  
   //check the no. of cars went out
   if(digitalRead(s12 == HIGH)
     Serial.println("1 car has went out");
