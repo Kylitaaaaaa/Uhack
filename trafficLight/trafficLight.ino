@@ -7,16 +7,20 @@ boolean roadChcker2 = false;
 boolean roadChecker3 = false;
 boolean roadChecker4 = false;
 
+int roadChecker = 0;
 //sensor Pins
 //IR Sensor
 int s11 = 10;
 
 //PIR Sensor;
 int s12 = 11;
+
 //LightSlots2
 // int lights[8] = {g1, r1, g2, r2, g3, r3, g4, r4};
 int gLights[4] = {2, 4, 6, 8};
 int rLights[4] = {3, 5, 7, 9};
+
+int roads[4] = {0, 0, 0, 0};
 
 //Car Count
 int sensor1[4] = {0, 0, 0, 0};
@@ -46,36 +50,30 @@ void loop() {
   //check the no. of cars entered
   while(true){
     if(s11 == CARMAX || s21 == CARMAX || s31 == CARMAX || s41 == CARMAX) break;
-    if(s11 == HIGH){
-      Serial.println("1 car entered at s1");
+    if(digitalRead(s11) == HIGH){
+      Serial.println("1 car entered at R1");
       sensor1[0]++;
+      if(sensor1[0] == CARMAX)
+        roadChecker = 1;
     }
-    else if(s21 == HIGH){
-      Serial.println("1 car entered at s1");
+    else if(digitalRead(s21) == HIGH){
+      Serial.println("1 car entered at R2");
       sensor1[1]++;
+      if(sensor1[0] == CARMAX)
+        roadChecker = 2;
     }
-    else if(s31 == HIGH){
-      Serial.println("1 car entered at s1");
+    else if(digitalRead(s31) == HIGH){
+      Serial.println("1 car entered at R3");
       sensor1[2]++;
+      if(sensor1[0] == CARMAX)
+        roadChecker = 3;
     }
-    else if(s41 == HIGH){
-      Serial.println("1 car entered at s1");
+    else if(digitalRead(s41) == HIGH){
+      Serial.println("1 car entered at R4");
       sensor1[3]++;
+      if(sensor1[0] == CARMAX)
+        roadChecker = 4;
     }
-  }
-
-  int currLight = getPriorityRoad();
-  
-  //turn on green light for priority road
-  turnOnGLight(currLight);
-
-  
-
-  //check the no. of cars enter
-  if(digitalRead(s11) == HIGH){
-    Serial.println("1 car entered at s1");
-    sensor1[0]++;
-    sensor2[0]--;
   }
 
   //check the no. of cars went out
@@ -83,6 +81,7 @@ void loop() {
     Serial.println("1 car has went out");
     sensor2[0]++;
     sensor1[0]--;
+
   
   //janz check if cars went out already
   if(sensor2[0] == 0 && sensor2[1] == 0 && sensor2[2] == 0 && sensor2[3] == 0){
@@ -93,10 +92,10 @@ void loop() {
   numCarToRelease = 0;
 
   //turn off green light
-  turnOffGLight(currLight);
+  turnOffGLight(roadChecker-1);
   
   //turn on red light
-  turnOnRLight(currLight);
+  turnOnRLight(roadChecker-1);
 }
 
 int getMax(int arr[]){
@@ -129,6 +128,10 @@ void turnOffRLight(int num){
 }
 
 int getPriorityRoad(){
+  
+}
+
+/*int getPriorityRoad(){
   int temp [4]= {0, 0, 0, 0};
 
   //get carCount
@@ -140,4 +143,4 @@ int getPriorityRoad(){
   numCarToRelease = temp[max];
 
   return max;
-}
+}*/
