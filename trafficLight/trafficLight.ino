@@ -1,4 +1,4 @@
-//LightSlots
+//LightSlots2
 // int lights[8] = {g1, r1, g2, r2, g3, r3, g4, r4};
 int gLights[4] = {1, 3, 5, 7};
 int rLights[4] = {2, 4, 6, 8};
