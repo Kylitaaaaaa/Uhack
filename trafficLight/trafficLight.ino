@@ -1,7 +1,7 @@
 //LightSlots2
 // int lights[8] = {g1, r1, g2, r2, g3, r3, g4, r4};
-int gLights[4] = {1, 3, 5, 7};
-int rLights[4] = {2, 4, 6, 8};
+int gLights[4] = {2, 4, 6, 8};
+int rLights[4] = {3, 5, 7, 9};
 
 //Car Count
 int sensor1[4] = {0, 0, 0, 0};
@@ -12,12 +12,23 @@ int numCarToRelease = 0;
 void setup() {
   // put your setup code here, to run once:
 
-  for(int i = 1; i< sizeof(lightsArr); i++){
-    pinMode(lightsArr[i], OUTPUT);
-  }
+
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+
+
+  
 }
 
 void loop() {
+  
+  
   // put your main code here, to run repeatedly:
   getCount();
   int currLight = getPriorityRoad();
