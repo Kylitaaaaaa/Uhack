@@ -11,9 +11,15 @@ int roadChecker = 0;
 //sensor Pins
 //IR Sensor
 int s11 = 10;
+int s21;
+int s31;
+int s41;
 
 //PIR Sensor;
 int s12 = 11;
+int s22;
+int s32;
+int s42;
 
 //LightSlots2
 // int lights[8] = {g1, r1, g2, r2, g3, r3, g4, r4};
@@ -47,7 +53,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  //check the no. of cars entered
+  //CHECK THE PRIORITY LANE
   while(true){
     if(s11 == CARMAX || s21 == CARMAX || s31 == CARMAX || s41 == CARMAX) break;
     if(digitalRead(s11) == HIGH){
@@ -76,6 +82,27 @@ void loop() {
     }
   }
 
+  //LOGIC PART
+  while(true){
+    turnOnGLight(roadChecker-1);
+    if(digitalRead(s12) == HIGH){
+       sensor2[roadChecker-1]--;
+       sensor1[roadChecker-1]--;
+       delay(100);
+    if(sensor2[roadCheck-1] == 0) break;
+    }
+   
+    
+    
+    
+  }
+  
+  sensor2[roadChecker-1] = CARMAX;
+  
+
+  
+
+
   //check the no. of cars went out
   if(digitalRead(s12 == HIGH)
     Serial.println("1 car has went out");
@@ -93,10 +120,13 @@ void loop() {
 
   //turn off green light
   turnOffGLight(roadChecker-1);
+
+  
+
   
   //turn on red light
   turnOnRLight(roadChecker-1);
-}
+};
 
 int getMax(int arr[]){
   int max = 0;
