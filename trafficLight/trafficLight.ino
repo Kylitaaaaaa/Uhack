@@ -1,3 +1,12 @@
+//Constants
+int CARMAX = 3;
+
+//road checkers
+boolean roadChecker1 = false;
+boolean roadChcker2 = false;
+boolean roadChecker3 = false;
+boolean roadChecker4 = false;
+
 //sensor Pins
 //IR Sensor
 int s11 = 10;
@@ -12,9 +21,6 @@ int rLights[4] = {3, 5, 7, 9};
 //Car Count
 int sensor1[4] = {0, 0, 0, 0};
 int sensor2[4] = {CARMAX, CARMAX, CARMAX, CARMAX};
-
-//Constants
-int CARMAX = 3;
 
 int numCarToRelease = 0;
 
@@ -35,20 +41,41 @@ void setup() {
 }
 
 void loop() {
-  
-  
   // put your main code here, to run repeatedly:
-  getCount();
+
+  //check the no. of cars entered
+  while(true){
+    if(s11 == CARMAX || s21 == CARMAX || s31 == CARMAX || s41 == CARMAX) break;
+    if(s11 == HIGH){
+      Serial.println("1 car entered at s1");
+      sensor1[0]++;
+    }
+    else if(s21 == HIGH){
+      Serial.println("1 car entered at s1");
+      sensor1[1]++;
+    }
+    else if(s31 == HIGH){
+      Serial.println("1 car entered at s1");
+      sensor1[2]++;
+    }
+    else if(s41 == HIGH){
+      Serial.println("1 car entered at s1");
+      sensor1[3]++;
+    }
+  }
+
   int currLight = getPriorityRoad();
   
   //turn on green light for priority road
   turnOnGLight(currLight);
 
+  
+
   //check the no. of cars enter
   if(digitalRead(s11) == HIGH){
     Serial.println("1 car entered at s1");
     sensor1[0]++;
-     sensor2[0]--;
+    sensor2[0]--;
   }
 
   //check the no. of cars went out
@@ -70,11 +97,6 @@ void loop() {
   
   //turn on red light
   turnOnRLight(currLight);
-}
-
-void getCount(){
-  //janz insert code here
-  Serial.println("")
 }
 
 int getMax(int arr[]){
@@ -119,7 +141,3 @@ int getPriorityRoad(){
 
   return max;
 }
-
-
-
-
